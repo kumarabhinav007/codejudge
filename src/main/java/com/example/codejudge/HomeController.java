@@ -1,16 +1,8 @@
 package com.example.codejudge;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
 import java.util.ListIterator;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
-	
-	@Autowired
-	ApplicationContext applicationContext;
 
 	@Autowired
 	HomeService homeService;
@@ -47,10 +36,6 @@ public class HomeController {
 			return response;
 		}
 
-		ListIterator<String> itr=payload.getLogFiles().listIterator();
-		while(itr.hasNext()) {
-			System.out.println(itr.next());
-		}
 		SuccessResponse response=new SuccessResponse();
 		response.setResponse(homeService.process(payload.getLogFiles(), payload.getParallelFileProcessingCount()));
 		return response;
